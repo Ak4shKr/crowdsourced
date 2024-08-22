@@ -70,3 +70,19 @@ npm install
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 PORT=5000
+```
+## 📝 Features Summary
+
+- **User Authentication**: Secure login and registration system.
+- **Create Issues**: Users can report issues with descriptions, photos, and locations.
+- **Upvote and Downvote**: Community voting on issues to prioritize based on impact.
+- **Delete Issue**: Users can delete issues if they were mistakenly added.
+- **Add Comments**: Users can comment on issues to provide additional details or suggestions.
+- **Discussion Forum**: Real-time collaboration with the community using Socket.IO.
+- **Track Issue Status**: Monitor issue statuses (open, resolved, or rejected) in real-time.
+- **Contact Us**: Section for users to ask questions or reach out to the admin.
+- **Akashsahabanaul@gmail.com**: Reach out to me!!
+
+
+
+
