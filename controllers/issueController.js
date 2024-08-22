@@ -92,7 +92,16 @@ export const openIssue = async (req, res) => {
 
 export const closedIssue = async (req, res) => {
   try {
-    const issue = await Issue.find({ status: "closed" });
+    const issue = await Issue.find({ status: "rejected" });
+    res.json(issue);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const resolvedIssue = async (req, res) => {
+  try {
+    const issue = await Issue.find({ status: "resolved" });
     res.json(issue);
   } catch (error) {
     res.status(500).json({ message: "Server error" });
@@ -115,12 +124,5 @@ export const commentOnIssue = async (req, res) => {
   }
 };
 
-export const deleteIssue = async (req, res) => {
-  try {
-    const issue = await Issue.findByIdAndDelete(req.params.id);
-    if (!issue) return res.status(404).json({ message: "Issue not found" });
-    res.json({ message: "Issue deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-};
+
+
