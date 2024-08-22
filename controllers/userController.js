@@ -63,13 +63,13 @@ export const allusers = async (req, res) => {
   }
 };
 
-export const query = async (req, res) => {
+export const deleteIssue = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
-    const query = await Query.create({ name, email, message });
-    query.save();
-    return res.status(201).json(query);
+    const issue = await Issue.findByIdAndDelete(req.params.id);
+    if (!issue) return res.status(404).json({ message: "Issue not found" });
+    res.json({ message: "Issue deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: "Server error" });
   }
 };
+
