@@ -26,6 +26,15 @@ const issueSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  comments: [
+    {
+      text: String,
+      createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
