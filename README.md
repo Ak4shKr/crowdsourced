@@ -1,10 +1,10 @@
 # 🛠️ Crowdsourced Problem Reporting and Resolution Platform
 
-Welcome to the **Crowdsourced Problem Reporting and Resolution Platform**, a community-driven solution designed to empower residents and streamline issue management for local authorities. This platform allows users to easily report and track public infrastructure problems, ensuring quicker resolutions and a better living environment for all.
+Welcome to the **Crowdsourced Problem Reporting and Resolution Platform**, a community-driven solution designed to empower residents and streamline issue management for local authorities. This platform allows users to easily report and track public **infrastructure problems**, **ensuring quicker resolutions** and a **better living environment** for all.
 
 ## 🚀 Project Overview
 
-Our platform bridges the gap between citizens and local authorities, making it easier to report and resolve issues like potholes, broken streetlights, and more. By leveraging the power of crowdsourcing, we enable communities to come together to identify and prioritize problems that need attention.
+Our platform **bridges the gap between citizens and local authorities**, making it easier to report and resolve issues like **potholes, broken streetlights, and more**. By leveraging the power of crowdsourcing, we enable communities to come together to identify and prioritize problems that need attention.
 
 ## ✨ Features
 
@@ -39,7 +39,7 @@ Our platform bridges the gap between citizens and local authorities, making it e
 ## 🌍 Real-World Impact
 
 ### Empowering Communities
-Our platform empowers residents to take an active role in improving their community by making it easy to report issues and track their resolution. This fosters a sense of accountability and community involvement, ensuring that public spaces are well-maintained and safe.
+Our platform empowers residents to take an active role in improving their community by making it easy to report issues and **track their resolution**. This fosters a sense of accountability and community involvement, ensuring that public spaces are well-maintained and safe.
 
 ### Enhancing Efficiency
 For local authorities, our platform provides an organized and efficient way to manage public complaints. By prioritizing issues based on community input, authorities can allocate resources more effectively and address the most pressing problems first.
