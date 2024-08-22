@@ -82,6 +82,7 @@ PORT=5000
 - **Track Issue Status**: Monitor issue statuses (open, resolved, or rejected) in real-time.
 - **Contact Us**: Section for users to ask questions or reach out to the admin.
 - **Akashsahabanaul@gmail.com**: Reach out to me!!
+- **LinkedIn**: https://www.linkedin.com/in/akash-saha-cod/
 
 
 
