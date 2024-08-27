@@ -14,7 +14,7 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/createIssue", authMiddleware, createIssue);
-router.get("/allIssues", authMiddleware, getAllIssues);
+router.get("/allIssues", getAllIssues);
 router.get("/openIssues", openIssue);
 router.get("/closedIssues", closedIssue);
 router.get("/resolvedIssues", resolvedIssue);
