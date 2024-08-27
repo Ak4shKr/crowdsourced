@@ -26,18 +26,23 @@ const issueSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  comments: [
-    {
-      text: String,
-      createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-    },
-  ],
+  comments: {
+    type: Array,
+    default: [],
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    // type: String,
+    // required: true,
+  },
+  complainer: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
