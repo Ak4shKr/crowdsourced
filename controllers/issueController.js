@@ -7,11 +7,13 @@ export const createIssue = async (req, res) => {
     // const user = await User.findById(req.body.userId);
     // const username = user.name;
     // console.log(username);
+    const user = await User.findById(req.body.userId);
     const issue = new Issue({
       title,
       description,
       location,
       createdBy: req.body.userId,
+      complainer: user.name,
     });
     await issue.save();
     res.status(201).json({ message: "Issue created successfully", issue });
@@ -57,6 +59,7 @@ export const getAllIssues = async (req, res) => {
 
 export const upvoteIssue = async (req, res) => {
   try {
+    console.log("route hitted");
     const issue = await Issue.findById(req.params.id);
     if (!issue) return res.status(404).json({ message: "Issue not found" });
 
@@ -114,7 +117,7 @@ export const commentOnIssue = async (req, res) => {
     if (!issue) return res.status(404).json({ message: "Issue not found" });
 
     issue.comments.push({
-      text: req.body.text,
+      comment: req.body.comment,
       createdBy: req.body.userId,
     });
     await issue.save();
@@ -123,6 +126,3 @@ export const commentOnIssue = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
-
