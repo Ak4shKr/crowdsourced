@@ -1,45 +1,119 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { CgProfile } from "react-icons/cg";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
   const token = localStorage.getItem("token");
+  let user = localStorage.getItem("user");
+  if (user) {
+    user = JSON.parse(user);
+  }
+
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     window.location = "/";
   };
-  return (
-    <nav className="bg-blue-600 p-4 shadow-lg">
-      <div className="container w-[70%] mx-auto flex justify-between items-center">
-        {/* Logo or Brand Name */}
-        <div className="text-white text-xl font-bold">
-          <a href="/">raiseYourVoice</a>
-        </div>
 
-        {/* Nav Items */}
-        <div className="flex space-x-6">
-          <a href="/" className="text-white hover:text-gray-200">
-            Home
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <nav className="sticky top-0 bg-[#0e1b3c] text-white border-b border-gray-600 w-full z-50">
+      <div className="w-full lg:w-[70%] mx-auto flex items-center justify-between p-4 text-center">
+        <a href="/" className="font-lora text-2xl font-bold">
+          VoicesUnite
+        </a>
+        <div className="md:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-white focus:outline-none"
+          >
+            {!isMenuOpen ? (
+              <RxHamburgerMenu className="font-semibold text-3xl" />
+            ) : (
+              <IoClose className="font-semibold text-3xl" />
+            )}
+          </button>
+        </div>
+        <div className="hidden md:flex space-x-4">
+          <a
+            href="/raise-complaint"
+            className="bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Bat~Chit
           </a>
-          <a href="/raise-complaint" className="text-white hover:text-gray-200">
-            Raise Complaint
+          <a
+            href="/raise-complaint"
+            className="bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Raise Your Issue
           </a>
-          <a href="/your-complaints" className="text-white hover:text-gray-200">
-            Your Past Complaints
+          <a
+            href="/myprofile"
+            className="flex gap-1 bg-[#05166b22] text-white border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            My Account
+            <span className="flex items-center font-semibold text-lg">
+              <CgProfile />
+            </span>
           </a>
-          {token ? (
-            <a
-              // href="/logout"
-              className="text-white hover:text-gray-200 cursor-pointer"
-              onClick={handleLogout}
-            >
-              Logout
-            </a>
-          ) : (
-            <a href="/login" className="text-white hover:text-gray-200">
-              Login
-            </a>
-          )}
+          <button
+            onClick={handleLogout}
+            className="bg-black cursor-pointer text-white border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Logout
+          </button>
         </div>
       </div>
+      {isMenuOpen && (
+        <div className="md:hidden bg-[#0e1b3c] mx-4 text-center">
+          <a
+            href="/raise-complaint"
+            className="block bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Bat~Chit
+          </a>
+          <a
+            href="/raise-complaint"
+            className="block bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Raise Your Issue
+          </a>
+          <a
+            href="/myprofile"
+            className="flex items-center justify-center gap-1 bg-[#05166b22] text-white border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            My Account
+            <span className="flex items-center font-semibold text-lg">
+              <CgProfile />
+            </span>
+          </a>
+          <button
+            onClick={handleLogout}
+            className="bg-[#05166b22] w-full cursor-pointer text-white border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
+          >
+            Logout
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
