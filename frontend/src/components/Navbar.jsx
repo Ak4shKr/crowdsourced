@@ -55,7 +55,7 @@ const Navbar = () => {
         </div>
         <div className="hidden md:flex space-x-4">
           <a
-            href="/raise-complaint"
+            href="/discussion"
             className="bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
           >
             Bat~Chit

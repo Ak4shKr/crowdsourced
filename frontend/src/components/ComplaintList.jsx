@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import service from "../http/service"; // Import your Axios instance
+import { ImLocation } from "react-icons/im";
+import { TbMessageReport } from "react-icons/tb";
 
 // ComplaintCard Component
 const ComplaintCard = ({
@@ -10,13 +12,12 @@ const ComplaintCard = ({
   createdBy,
   upvotes,
   downvotes,
-  CommentsCount,
+  commentsCount,
   id,
 }) => {
   const [comment, setComment] = useState("");
   const [refresh, setRefresh] = useState(false);
-  // const p = CommentsCount.length;
-  // console.log(CommentsCount);
+
   const handleupvote = async (e) => {
     try {
       const token = localStorage.getItem("token");
@@ -80,31 +81,40 @@ const ComplaintCard = ({
       setComment("");
     }
   };
+
+  const handlereport = async (e) => {};
   return (
-    <div className="w-[70%] mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
+    <div className="w-[90%] md:w-[70%] mx-auto bg-blue-50 shadow-lg rounded-lg overflow-hidden my-4">
       <div className="p-4">
         {/* Title and Location */}
-        <div className="flex justify-between items-center">
-          <h2 className="text-xl font-bold text-gray-800">{title}</h2>
-          <span className="text-sm font-semibold text-gray-500">
-            {location}
+        <div className="flex justify-between">
+          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <span className="flex text-md font-semibold text-gray-500 text-right">
+            <ImLocation />` {location}
           </span>
         </div>
         {/* Description */}
-        <p className="mt-2 w-[98%] mx-auto text-gray-600">{description}</p>
-
+        <div className="flex justify-between items-center">
+          <p className="mt-2 w-[80%] ml-2 text-md font-normal text-gray-800">
+            {description}
+          </p>
+          <TbMessageReport
+            onClick={handlereport}
+            className="text-red-600 font-extrabold text-2xl cursor-pointer"
+          />
+        </div>
         {/* Created By and Date */}
         <div className="flex justify-between items-center mt-4">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-600">
             <span>Created by: </span>
             <span className="font-semibold">{createdBy}</span>
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-sm font-medium text-gray-800">
             {new Date(createdAt).toLocaleDateString()}
           </div>
         </div>
         {/* Upvote and Downvote Buttons */}
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex justify-between items-center mt-4 font-medium">
           <button
             onClick={handleupvote}
             className="flex items-center text-green-500 hover:text-green-700"
@@ -140,7 +150,7 @@ const ComplaintCard = ({
                 d="M8 10h8m-4-4h4m-2 8h2m-6 0h.01M8 14h.01M4 6h16M4 6v14l4-4h12"
               />
             </svg>
-            Comments ({CommentsCount})
+            Comments ({commentsCount})
           </button>
           <button
             // onClick={handledownvote}
@@ -172,13 +182,13 @@ const ComplaintCard = ({
               id="comment"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
-              className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+              className="w-full  border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
             />
             <button
               type="submit"
-              className="ml-4 bg-blue-500 text-white px-6 py-2 rounded-md hover:bg-blue-600"
+              className="ml-4 bg-yellow-300 text-gray-800 font-semibold text-lg px-4 py-2 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-300"
             >
-              Submit
+              submit
             </button>
           </div>
         </form>
@@ -202,7 +212,7 @@ const ComplaintList = () => {
           // },
         }); // Adjust endpoint as necessary
         setComplaints(response.data);
-        // console.log(response.data);
+        console.log(response.data);
       } catch (error) {
         setError("Failed to fetch complaints");
         console.error("Error fetching complaints:", error);
@@ -213,12 +223,12 @@ const ComplaintList = () => {
 
     fetchComplaints();
   }, []);
-  // console.log(CommentsCount);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
+    <div className="min-h-[87vh]">
       {complaints.map((complaint) => (
         <ComplaintCard
           key={complaint._id}

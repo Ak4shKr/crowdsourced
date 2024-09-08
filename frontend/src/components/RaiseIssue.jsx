@@ -7,6 +7,7 @@ const RaiseComplaintForm = () => {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [issueType, setIssueType] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,74 +49,84 @@ const RaiseComplaintForm = () => {
   };
 
   return (
-    <div className="w-[40%] mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4 p-4">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
-        Raise a Complaint
-      </h2>
-      <form onSubmit={handleSubmit}>
-        {/* Title Field */}
-        <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="title">
-            Title
-          </label>
-          <input
-            type="text"
-            id="title"
-            placeholder="Enter title (e.g., Flooded Street)"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+    <div className="h-full bg-opacity-50">
+      <div className="w-[90%] md:w-[60%] lg:w-[40%] text-white mx-auto bg-[#1c1a41] shadow-xl rounded-lg overflow-hidden my-4 p-8">
+        <h2 className="text-2xl font-bold mb-4">Raise Your Issue</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Issue Type Dropdown */}
+          {/* <div className="mb-4">
+            <label className="block font-semibold mb-2" htmlFor="issueType">
+              Issue Type
+            </label>
+            <select
+              id="issueType"
+              value={issueType}
+              onChange={(e) => setIssueType(e.target.value)}
+              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            >
+              <option value="corruption">Corruption</option>
+              <option value="service">Service</option>
+              <option value="others">Others</option>
+            </select>
+          </div> */}
+          {/* Title Field */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2" htmlFor="title">
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              placeholder="Enter title (e.g., Flooded Street)"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+          </div>
 
-        {/* Location Field */}
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="location"
+          {/* Location Field */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2" htmlFor="location">
+              Location
+            </label>
+            <input
+              type="text"
+              id="location"
+              placeholder="Enter location (e.g., Sec 10, Faridabad)"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+          </div>
+
+          {/* Description Field */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-2" htmlFor="description">
+              Description
+            </label>
+            <textarea
+              id="description"
+              placeholder="Enter description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              rows="4"
+            ></textarea>
+          </div>
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading} // Disable button when loading
+            className="w-full bg-yellow-300 text-black font-semibold text-lg px-4 py-2 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-500"
           >
-            Location
-          </label>
-          <input
-            type="text"
-            id="location"
-            placeholder="Enter location (e.g., Sec 10, Faridabad)"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+            {loading ? "Submitting..." : "submit Issue"}
+          </button>
 
-        {/* Description Field */}
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="description"
-          >
-            Description
-          </label>
-          <textarea
-            id="description"
-            placeholder="Enter description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-          ></textarea>
-        </div>
-
-        {/* Submit Button */}
-        <button
-          type="submit"
-          disabled={loading} // Disable button when loading
-          className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {loading ? "Submitting..." : "Submit Complaint"}
-        </button>
-
-        {/* Error Message */}
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-      </form>
+          {/* Error Message */}
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 };
