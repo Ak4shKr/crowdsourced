@@ -11,7 +11,8 @@ export const authMiddleware = async (req, res, next) => {
         success: false,
       });
     }
-    jwt.verify(token, "secret", (err, decoded) => {
+    const secret = process.env.JWT_SECRET;
+    jwt.verify(token, secret, (err, decoded) => {
       if (err) {
         console.log(err);
         return res.status(401).send({
