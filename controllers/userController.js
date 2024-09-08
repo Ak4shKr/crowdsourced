@@ -53,6 +53,65 @@ export const allIssueByUser = async (req, res) => {
   }
 };
 
+export const dashborad = async (req, res) => {
+  try {
+    const issues = await Issue.find({ createdBy: req.body.userId });
+    const totalIssues = issues.length;
+    const resolvedIssues = issues.filter(
+      (issue) => issue.status === "resolved"
+    ).length;
+    const rejectedIssues = issues.filter(
+      (issue) => issue.status === "rejected"
+    ).length;
+    const openIssues = issues.filter((issue) => issue.status === "open").length;
+
+    const issueByDate = await Issue.aggregate([
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+
+    // const commentsByIssue = await Issue.aggregate([
+    //   {
+    //     $group: {
+    //       _id: "$_id",
+    //       count: { $sum: { $size: "$comments" } },
+    //     },
+    //   },
+    // ]);
+
+    const totalUpvotes = await issues.reduce((acc, issue) => {
+      return acc + issue.upvotes;
+    }, 0);
+    const totalDownvotes = await issues.reduce((acc, issue) => {
+      return acc + issue.downvotes;
+    }, 0);
+    const totalComments = await issues.reduce((acc, issue) => {
+      return acc + issue.comments.length;
+    }, 0);
+
+    res.status(200).json({
+      data: {
+        totalIssues,
+        resolvedIssues,
+        rejectedIssues,
+        openIssues,
+        issueByDate,
+        // commentsByIssue,
+        issues,
+        totalUpvotes,
+        totalDownvotes,
+        totalComments,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const allusers = async (req, res) => {
   try {
     const users = await User.find();
@@ -72,4 +131,3 @@ export const deleteIssue = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
