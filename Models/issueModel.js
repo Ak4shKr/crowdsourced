@@ -18,6 +18,10 @@ const issueSchema = new mongoose.Schema({
     enum: ["open", "resolved", "rejected"],
     default: "open",
   },
+  type: {
+    type: String,
+    enum: ["corrouption", "service", "others"],
+  },
   upvotes: {
     type: Number,
     default: 0,
