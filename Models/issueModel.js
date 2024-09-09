@@ -21,6 +21,7 @@ const issueSchema = new mongoose.Schema({
   type: {
     type: String,
     enum: ["corrouption", "service", "others"],
+    // required: true,
   },
   upvotes: {
     type: Number,
@@ -43,6 +44,10 @@ const issueSchema = new mongoose.Schema({
   complainer: {
     type: String,
     required: true,
+  },
+  reports: {
+    type: Array,
+    default: [],
   },
   createdAt: {
     type: Date,

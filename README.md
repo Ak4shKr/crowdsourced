@@ -83,7 +83,3 @@ PORT=5000
 - **Contact Us**: Section for users to ask questions or reach out to the admin.
 - **Akashsahabanaul@gmail.com**: Reach out to me!!
 - **LinkedIn**: https://www.linkedin.com/in/akash-saha-cod/
-
-
-
-
