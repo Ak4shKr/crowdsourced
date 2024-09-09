@@ -1,11 +1,28 @@
 // LoginModal.js
-import React from "react";
+import React, { useState } from "react";
+import service from "../http/service";
 
 const ContactUsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const response = await service.post("/users/query", {
+      name: name,
+      email: email,
+      message: message,
+    });
+    setLoading(false);
+    if (!response) {
+      alert("Error submitting form");
+      return;
+    }
     alert("Form submitted");
     onClose();
   };
@@ -20,6 +37,8 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <input
               type="text"
               id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-[#1e1e1e] text-white focus:outline-none focus:ring-2 focus:ring-yellow-300"
               required
             />
@@ -29,6 +48,8 @@ const ContactUsModal = ({ isOpen, onClose }) => {
             <input
               type="email"
               id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-[#1e1e1e] text-white focus:outline-none focus:ring-2 focus:ring-yellow-300"
               required
             />
@@ -39,6 +60,8 @@ const ContactUsModal = ({ isOpen, onClose }) => {
               rows={5}
               type="text"
               id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-[#1e1e1e] text-white focus:outline-none focus:ring-2 focus:ring-yellow-300"
               required
             />
@@ -46,9 +69,10 @@ const ContactUsModal = ({ isOpen, onClose }) => {
           <div className="flex justify-between items-center">
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg hover:bg-yellow-400"
             >
-              Submit
+              {loading ? "Submitting..." : "Submit"}
             </button>
           </div>
         </form>
