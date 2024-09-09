@@ -86,7 +86,7 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-[#0e1b3c] mx-4 text-center">
           <a
-            href="/raise-complaint"
+            href="/discussion"
             className="block bg-[#05166b22] text-white font-semibold border-2 border-gradient-to-r from-blue-500 via-purple-600 to-red-500 px-4 py-2 rounded-lg hover:bg-gray-800"
           >
             Bat~Chit

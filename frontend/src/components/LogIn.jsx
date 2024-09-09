@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import service from "../http/service";
 import Navbar1 from "./Navbar1";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     // Simple validation
     if (!email || !password) {
       alert("Please fill out all fields.");
       return;
     }
 
-    // Additional validation can be added here (e.g., email format)
+    setLoading(true);
 
     // Call the onSubmit function passed as a prop
     try {
@@ -23,6 +23,7 @@ const LoginForm = () => {
         email: email, // Ensure these match your backend expectations
         password: password,
       });
+      setLoading(false);
       console.log(response.data);
       localStorage.clear();
       localStorage.setItem("token", response.data.token);
@@ -30,16 +31,14 @@ const LoginForm = () => {
       window.location = "/";
     } catch (error) {
       console.error("Error during login:", error.response.data); // Check response data for details
+      setLoading(false);
     }
 
     // Reset form fields after submission
     setEmail("");
     setPassword("");
-
-    // Reset form fields after submission
-    setEmail("");
-    setPassword("");
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0e1b3c] to-[#2d162d] flex flex-col">
       {/* Navbar */}
@@ -88,9 +87,10 @@ const LoginForm = () => {
             {/* Submit Button */}
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-yellow-300 text-black font-semibold text-lg  px-4 py-2 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-300"
             >
-              Login
+              {loading ? "Logging in..." : "LogIn"}
             </button>
             <p className="mt-4 text-md">
               New User?{" "}

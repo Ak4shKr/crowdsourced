@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ImLocation } from "react-icons/im";
 import { MdDelete } from "react-icons/md";
-
-import axios from "axios";
 import service from "../http/service";
 
 const UserComplaintCard = ({
@@ -163,8 +161,10 @@ const UserComplaintList = () => {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div className="text-red-500">{error}</div>;
+  if (loading)
+    return <div className="text-2xl text-white font-semibold">Loading...</div>;
+  if (error)
+    return <div className="text-red-500 text-xl font-semibold">{error}</div>;
 
   return (
     <div className="">

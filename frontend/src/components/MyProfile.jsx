@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import UserComplaintList from "./UserComplaintList";
 import UserDashboard from "./UserDashboard";
 
-// Dummy Components for each tab
-
 const EditProfile = () => <div>Edit your profile here.</div>;
-const YourAnalytics = () => <div>Your analytics will be shown here.</div>;
-
 const MyAccount = () => {
   const [activeTab, setActiveTab] = useState("complaints"); // Default tab is 'complaints'
   const user = JSON.parse(localStorage.getItem("user"));

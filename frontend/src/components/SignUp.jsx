@@ -6,6 +6,7 @@ const SignupForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const SignupForm = () => {
       alert("Please fill out all fields.");
       return;
     }
-
+    setLoading(true);
     // Additional validation can be added here (e.g., email format, password strength)
 
     // Call the onSubmit function passed as a prop
@@ -26,12 +27,14 @@ const SignupForm = () => {
         name: name,
         password: password,
       });
+      setLoading(false);
       console.log(response.data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data));
       window.location = "/";
     } catch (error) {
       console.error("Error during signup:", error.response.data); // Check response data for details
+      setLoading(false);
     }
 
     // Reset form fields after submission
