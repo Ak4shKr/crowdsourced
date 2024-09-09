@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 
 const socket = io("http://localhost:3000"); // Replace with your server URL
@@ -6,6 +6,7 @@ const socket = io("http://localhost:3000"); // Replace with your server URL
 const Discussion = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const messagesEndRef = useRef(null); // Reference to the bottom of the chat
 
   useEffect(() => {
     // Listen for incoming messages (from other clients)
@@ -24,6 +25,14 @@ const Discussion = () => {
       socket.off("chatMessage");
     };
   }, []);
+
+  useEffect(() => {
+    scrollToBottom(); // Scroll to the bottom every time the message list changes
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const sendMessage = (e) => {
     e.preventDefault();
@@ -54,46 +63,54 @@ const Discussion = () => {
   };
 
   return (
-    <div className="h-full">
-      <div className="h-full w-full sm:w-[80%] md:w-[70%] lg:w-[40%] text-white mx-auto bg-[#1c1a41] shadow-xl rounded-lg overflow-hidden my-4 p-2 md:p-4">
-        <h2 className="text-2xl font-semibold mb-4">Discussion</h2>
-        <div className="overflow-y-scroll mb-4 bg-[#697bc6] text-white p-4 rounded-lg flex flex-col">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex flex-col mb-4 p-3 rounded-lg max-w-[70%] ${
-                msg.isSent
-                  ? "bg-blue-500 text-white self-end"
-                  : "bg-gray-300 text-black self-start"
-              }`}
-            >
-              {/* Sender's name */}
-              <span className="text-sm font-bold mb-1">
-                <span className="text-yellow-300">
+    <div className="h-[90vh] lg:h-[87vh] w-full sm:w-[80%] md:w-[70%] lg:w-[40%] text-white mx-auto bg-[#1c1a41] shadow-xl rounded-lg overflow-hidden my-4 p-2 md:p-4 flex flex-col">
+      {/* Heading fixed at the top */}
+      <div>
+        <h2 className="text-2xl font-lora font-semibold mb-4">Discussion</h2>
+      </div>
+
+      {/* Message box that is scrollable and grows to fill available space */}
+      <div className="flex-grow overflow-y-scroll bg-[#697bc6] text-white p-4 rounded-lg mb-4">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex-col mb-2 p-2 px-3 rounded-lg max-w-[70%] ${
+              msg.isSent
+                ? "ml-auto bg-blue-500 text-gray-50"
+                : "mr-auto bg-gray-300 text-black"
+            }`}
+          >
+            {/* Sender's name */}
+            {!msg.isSent && (
+              <span className="text-sm font-bold">
+                <span className="text-[#4334c9]">
                   {getFirstWord(msg.sender)}
                 </span>
               </span>
-              {/* Message content */}
-              <div className="text-base">{msg.text}</div>
-            </div>
-          ))}
-        </div>
-        <form onSubmit={sendMessage} className="flex gap-4">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="flex-grow px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
-            placeholder="Type your message..."
-          />
-          <button
-            type="submit"
-            className="px-6 py-2 bg-yellow-500 text-black font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-1 focus:ring-yellow-500"
-          >
-            Send
-          </button>
-        </form>
+            )}
+            {/* Message content */}
+            <div className="text-base break-words">{msg.text}</div>
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
       </div>
+
+      {/* Input form fixed at the bottom */}
+      <form onSubmit={sendMessage} className="flex items-center gap-4">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="flex-grow px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
+          placeholder="Type your message..."
+        />
+        <button
+          type="submit"
+          className="px-6 py-2 bg-yellow-500 text-black font-semibold rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-1 focus:ring-yellow-500"
+        >
+          Send
+        </button>
+      </form>
     </div>
   );
 };
