@@ -13,7 +13,7 @@ const RaiseComplaintForm = () => {
     e.preventDefault();
 
     // Simple validation
-    if (!title || !location || !description) {
+    if (!title || !location || !description || !issueType) {
       alert("Please fill out all fields.");
       return;
     }
@@ -27,6 +27,7 @@ const RaiseComplaintForm = () => {
           title,
           location,
           description,
+          type: issueType,
         },
         {
           headers: { Authorization: `${localStorage.getItem("token")}` },
@@ -54,7 +55,7 @@ const RaiseComplaintForm = () => {
         <h2 className="text-2xl font-bold mb-4">Raise Your Issue</h2>
         <form onSubmit={handleSubmit}>
           {/* Issue Type Dropdown */}
-          {/* <div className="mb-4">
+          <div className="mb-4">
             <label className="block font-semibold mb-2" htmlFor="issueType">
               Issue Type
             </label>
@@ -62,13 +63,13 @@ const RaiseComplaintForm = () => {
               id="issueType"
               value={issueType}
               onChange={(e) => setIssueType(e.target.value)}
-              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
             >
-              <option value="corruption">Corruption</option>
               <option value="service">Service</option>
+              <option value="corrouption">Corruption</option>
               <option value="others">Others</option>
             </select>
-          </div> */}
+          </div>
           {/* Title Field */}
           <div className="mb-4">
             <label className="block font-semibold mb-2" htmlFor="title">
