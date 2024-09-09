@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import service from "../http/service"; // Import your Axios instance
 import { ImLocation } from "react-icons/im";
 import { TbMessageReport } from "react-icons/tb";
+import ReportForm from "./ReportForm";
 
 // ComplaintCard Component
 const ComplaintCard = ({
@@ -16,7 +17,9 @@ const ComplaintCard = ({
   id,
 }) => {
   const [comment, setComment] = useState("");
+  const [report, setReport] = useState("");
   const [refresh, setRefresh] = useState(false);
+  const [reportForm, setReportForm] = useState(false);
 
   const handleupvote = async (e) => {
     try {
@@ -57,7 +60,7 @@ const ComplaintCard = ({
           },
         }
       );
-      console.log("Upvote successful", response.data);
+      console.log("downvote successful", response.data);
     } catch (error) {
       console.log("Error upvoting issue", error);
     }
@@ -82,7 +85,28 @@ const ComplaintCard = ({
     }
   };
 
-  const handlereport = async (e) => {};
+  const handlereport = async (e) => {
+    e.preventDefault();
+    const response = await service.post(
+      `/issues/reportIssue/${id}`,
+      {
+        report: report,
+      },
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response);
+    if (response.status === 200) {
+      alert("Report submitted successfully");
+      setReport("");
+      return;
+    } else {
+      alert("Report not submitted");
+    }
+  };
   return (
     <div className="w-[90%] md:w-[70%] mx-auto bg-blue-50 shadow-lg rounded-lg overflow-hidden my-4">
       <div className="p-4">
@@ -99,7 +123,7 @@ const ComplaintCard = ({
             {description}
           </p>
           <TbMessageReport
-            onClick={handlereport}
+            onClick={() => setReportForm(!reportForm)}
             className="text-red-600 font-extrabold text-2xl cursor-pointer"
           />
         </div>
@@ -153,7 +177,7 @@ const ComplaintCard = ({
             Comments ({commentsCount})
           </button>
           <button
-            // onClick={handledownvote}
+            onClick={handledownvote}
             className="flex items-center text-red-500 hover:text-red-700"
           >
             <svg
@@ -193,6 +217,11 @@ const ComplaintCard = ({
           </div>
         </form>
       </div>
+      <ReportForm
+        isOpen={reportForm}
+        onClose={() => setReportForm(!reportForm)}
+        id={id}
+      />
     </div>
   );
 };
@@ -224,8 +253,12 @@ const ComplaintList = () => {
     fetchComplaints();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading)
+    return (
+      <p className="text-xl text-white font-semibold text-center">Loading...</p>
+    );
+  if (error)
+    return <p className="text-xl text-red-700 font-semibold">{error}</p>;
 
   return (
     <div className="min-h-[87vh]">

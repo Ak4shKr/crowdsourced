@@ -44,16 +44,3 @@ function App() {
 }
 
 export default App;
-
-// <div className="App">
-//       <Navbar />
-//       <ComplaintCard
-//         title="Flooded Street"
-//         location="sec 10, faridabad"
-//         description="The street in front of my house is completely flooded due to heavy rain. It’s becoming a health hazard."
-//         createdAt="2024-08-25"
-//         createdBy="John Doe"
-//         upvotes={10}
-//         downvotes={2}
-//       />
-//     </div>
