@@ -1,33 +1,46 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
+import service from "../http/service";
 
-const socket = io("http://localhost:3000"); // Replace with your server URL
+const socket = io("http://localhost:3000");
 
 const Discussion = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  const username = user.name;
+  const userId = user._id;
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const messagesEndRef = useRef(null); // Reference to the bottom of the chat
+  const messagesEndRef = useRef(null);
+
+  const fetchMessages = async () => {
+    try {
+      const response = await service.get("/admin/messages");
+      setMessages(response.data.messages);
+    } catch (error) {
+      console.log("Error fetching messages", error);
+    }
+  };
 
   useEffect(() => {
-    // Listen for incoming messages (from other clients)
+    // Fetch message history
+    fetchMessages();
+
+    // Listen for incoming messages from the server
     socket.on("chatMessage", (msg) => {
-      if (msg && msg.text && msg.senderId !== socket.id) {
-        // Only append the message if it's not from the sender
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: msg.text, isSent: false, sender: msg.sender },
-        ]);
-      }
+      setMessages((prevMessages) => {
+        // Remove optimistic (pending) message
+        const newMessages = prevMessages.filter((m) => m.isPending !== true);
+        return [...newMessages, msg];
+      });
     });
 
-    // Cleanup on component unmount
     return () => {
       socket.off("chatMessage");
     };
   }, []);
 
   useEffect(() => {
-    scrollToBottom(); // Scroll to the bottom every time the message list changes
+    scrollToBottom();
   }, [messages]);
 
   const scrollToBottom = () => {
@@ -36,66 +49,53 @@ const Discussion = () => {
 
   const sendMessage = (e) => {
     e.preventDefault();
-    const user = JSON.parse(localStorage.getItem("user"));
-    const username = user.name;
+
     if (message.trim()) {
       const msg = {
         text: message,
-        isSent: true,
-        senderId: socket.id,
+        senderId: userId,
         sender: username,
+        isPending: true, // Mark message as pending
       };
 
-      // Append message locally immediately for the sender
+      // Optimistically append the message locally
       setMessages((prevMessages) => [...prevMessages, msg]);
 
-      // Send the message to the server
-      socket.emit("chatMessage", msg);
+      // Emit the message to the server
+      socket.emit("chatMessage", { ...msg, isPending: false });
 
       // Clear the input field
       setMessage("");
     }
   };
 
-  // Function to style the first word of the sender's name
-  const getFirstWord = (name) => {
-    return name.split(" ")[0];
-  };
-
   return (
     <div className="h-[90vh] lg:h-[87vh] w-full sm:w-[80%] md:w-[70%] lg:w-[40%] text-white mx-auto bg-[#1c1a41] shadow-xl rounded-lg overflow-hidden my-4 p-2 md:p-4 flex flex-col">
-      {/* Heading fixed at the top */}
       <div>
         <h2 className="text-2xl font-lora font-semibold mb-4">Discussion</h2>
       </div>
 
-      {/* Message box that is scrollable and grows to fill available space */}
       <div className="flex-grow overflow-y-scroll bg-[#697bc6] text-white p-4 rounded-lg mb-4">
         {messages.map((msg, index) => (
           <div
             key={index}
             className={`flex-col mb-2 p-2 px-3 rounded-lg max-w-[70%] ${
-              msg.isSent
+              msg.senderId === userId
                 ? "ml-auto bg-blue-500 text-gray-50"
                 : "mr-auto bg-gray-300 text-black"
-            }`}
+            } ${msg.isPending ? "opacity-50" : ""}`} // Add transparency for pending messages
           >
-            {/* Sender's name */}
-            {!msg.isSent && (
-              <span className="text-sm font-bold">
-                <span className="text-[#4334c9]">
-                  {getFirstWord(msg.sender)}
-                </span>
+            {msg.senderId !== userId && (
+              <span className="text-sm font-bold text-[#4334c9]">
+                {msg.sender}
               </span>
             )}
-            {/* Message content */}
             <div className="text-base break-words">{msg.text}</div>
           </div>
         ))}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input form fixed at the bottom */}
       <form onSubmit={sendMessage} className="flex items-center gap-4">
         <input
           type="text"
