@@ -49,7 +49,11 @@ const Landing = () => {
           <p className="absolute bottom-2 text-md mb-2">
             <a target="blank" href="https://linkedin.com/in/akash-saha-cod">
               {" "}
-              Made with ❤️ by ~Akash!
+              Made with ❤️ by{" "}
+              <span className="font-semibold text-gray-300 hover:text-blue-300">
+                {" "}
+                ~Akash !
+              </span>
             </a>
           </p>
         </div>
