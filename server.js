@@ -1,6 +1,7 @@
 import express from "express";
 // import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import Message from "./Models/messgeModel.js";
 import cors from "cors";
 const app = express();
 app.use(express.json());
@@ -21,8 +22,14 @@ io.on("connection", (socket) => {
   console.log("New client connected");
 
   // Example Socket.IO event
-  socket.on("chatMessage", (msg) => {
+  socket.on("chatMessage", async (msg) => {
     console.log("Message received: ", msg);
+    const message = new Message({
+      sender: msg.sender,
+      text: msg.text,
+      senderId: msg.senderId,
+    });
+    await message.save();
     io.emit("chatMessage", msg); // Broadcast the message to all clients
   });
 
@@ -50,8 +57,10 @@ app.use(
 // Routes
 import userRoutes from "./routes/userRoutes.js";
 import issueRoutes from "./routes/issueRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 app.use("/api/users", userRoutes);
 app.use("/api/issues", issueRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Connect to MongoDB
 mongoose
