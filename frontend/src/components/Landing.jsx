@@ -66,3 +66,5 @@ const Landing = () => {
 };
 
 export default Landing;
+
+// something to be added for footer
