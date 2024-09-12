@@ -12,7 +12,7 @@ import { Server } from "socket.io";
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*", // Replace with the URL of your frontend
+    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -47,7 +47,7 @@ const MONGO_URI = process.env.MONGO_URI;
 //cors with origin
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with the URL of your frontend
+    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
