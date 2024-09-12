@@ -52,7 +52,7 @@ const Landing = () => {
               Made with ❤️ by{" "}
               <span className="font-semibold text-gray-300 hover:text-blue-300">
                 {" "}
-                ~Akash !
+                ~Akash!
               </span>
             </a>
           </p>
