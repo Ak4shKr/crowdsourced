@@ -62,6 +62,7 @@ const RaiseComplaintForm = () => {
             <select
               id="issueType"
               value={issueType}
+              defaultValue={"service"}
               onChange={(e) => setIssueType(e.target.value)}
               className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
             >
