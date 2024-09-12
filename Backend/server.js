@@ -4,7 +4,19 @@ import mongoose from "mongoose";
 import Message from "./Models/messgeModel.js";
 import cors from "cors";
 const app = express();
+//cors with origin
+app.use(
+  cors({
+    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
+
+//frontend url
+// https://crowdsourced-1.onrender.com/
 
 //socketio setup
 import http from "http";
@@ -43,16 +55,6 @@ import dotenv from "dotenv";
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
-
-//cors with origin
-app.use(
-  cors({
-    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
 
 // Routes
 import userRoutes from "./routes/userRoutes.js";
