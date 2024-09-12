@@ -10,14 +10,14 @@ const Landing = () => {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="Landing-page font-lora bg-custom min-h-screen flex flex-col items-center">
+    <div className="Landing-page font-lora bg-custom flex flex-col items-center">
       {/* Navbar */}
       <Navbar1 />
       {/* Main Content */}
       <div className="flex flex-grow w-full md:w-[50%] justify-center items-center">
         <div className="flex flex-col items-center text-center text-white">
           <h1 className="text-5xl font-extrabold mb-4">Welcome to</h1>
-          <h2 className="text-5xl md:text-6xl font-bold text-yellow-300 mb-8">
+          <h2 className="text-4xl md:text-6xl font-bold text-yellow-300 mb-8">
             Crowdsourced Reporting Platform
           </h2>
           <p className="text-xl mb-1">
@@ -46,7 +46,7 @@ const Landing = () => {
               Contact Us
             </button>
           </div>
-          <p className="absolute bottom-2 text-md mb-2">
+          <p className="md:absolute md:bottom-2 text-md mb-2">
             <a target="blank" href="https://linkedin.com/in/akash-saha-cod">
               {" "}
               Made with ❤️ by{" "}
