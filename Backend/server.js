@@ -12,7 +12,7 @@ import { Server } from "socket.io";
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Replace with the URL of your frontend
+    origin: "*", // Replace with the URL of your frontend
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 //env config
 import dotenv from "dotenv";
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI;
 
 //cors with origin
@@ -73,6 +73,6 @@ mongoose
   });
 
 //server connection
-server.listen(3000, () => {
+server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on port ${PORT}`);
 });
