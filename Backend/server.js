@@ -9,7 +9,7 @@ app.use(
   cors({
     origin: "https://crowdsourced.vercel.app", // Your frontend URL
     methods: ["GET", "POST", "PUT", "DELETE"],
-    // credentials: true,
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -26,7 +26,7 @@ const io = new Server(server, {
   cors: {
     origin: "https://crowdsourced.vercel.app", // Your frontend URL
     methods: ["GET", "POST"],
-    // credentials: true,
+    credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
   },
 });
