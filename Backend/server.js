@@ -7,7 +7,7 @@ const app = express();
 //cors with origin
 app.use(
   cors({
-    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
+    origin: "https://crowdsourced.vercel.app", // Replace with the URL of your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -24,7 +24,7 @@ import { Server } from "socket.io";
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://crowdsourced-1.onrender.com", // Replace with the URL of your frontend
+    origin: "https://crowdsourced.vercel.app", // Replace with the URL of your frontend
     methods: ["GET", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
