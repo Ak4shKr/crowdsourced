@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import service from "../http/service";
 
-// const socket = io("https://crowdsourced.onrender.com/");
+const socket = io("https://crowdsourced.onrender.com/");
 
 const Discussion = () => {
   const user = JSON.parse(localStorage.getItem("user"));
