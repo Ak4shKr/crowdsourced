@@ -25,13 +25,13 @@ const MyAccount = () => {
   };
 
   return (
-    <div className="h-full w-[95%] lg:w-[70%] mx-auto shadow-lg rounded-lg p-4 mt-2">
-      <h2 className="font-lora text-2xl font-bold text-yellow-300 mb-4">
+    <div className="h-full w-[95%] lg:w-[70%] mx-auto shadow-lg rounded-lg px-4 py-2 mt-1">
+      <h2 className="font-lora text-xl font-bold text-yellow-300 mb-1">
         {" "}
         Hello, {name}
       </h2>
       {/* Tabs Navigation */}
-      <div className="font-lora sticky top-[4rem] md:top-[4.7rem] z-20 flex gap-2 bg-blue-600 text-white rounded-lg mb-4 px-1 py-2 justify-center">
+      <div className="font-lora  text-sm sticky top-[3.4rem] md:top-[3.5rem] z-20 flex gap-2 bg-blue-600 text-white rounded-lg mb-2 px-1 py-1 justify-center">
         <button
           className={`px-4 py-2 border rounded-md font-semibold border-none ${
             activeTab === "analytics" ? "bg-white text-black" : ""

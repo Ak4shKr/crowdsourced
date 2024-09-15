@@ -52,10 +52,10 @@ const RaiseComplaintForm = () => {
   return (
     <div className="h-full bg-opacity-50">
       <div className="w-[90%] md:w-[60%] lg:w-[40%] text-white mx-auto bg-[#1c1a41] shadow-xl rounded-lg overflow-hidden my-4 p-8">
-        <h2 className="text-2xl font-bold mb-4">Raise Your Issue</h2>
+        <h2 className="text-xl font-bold mb-4">Raise Your Issue</h2>
         <form onSubmit={handleSubmit}>
           {/* Issue Type Dropdown */}
-          <div className="mb-4">
+          <div className="mb-4 text-sm">
             <label className="block font-semibold mb-2" htmlFor="issueType">
               Issue Type
             </label>
@@ -63,7 +63,7 @@ const RaiseComplaintForm = () => {
               id="issueType"
               value={issueType}
               onChange={(e) => setIssueType(e.target.value)}
-              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
+              className="w-full px-3 py-1 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
             >
               <option value="service">Service</option>
               <option value="corrouption">Corruption</option>
@@ -71,7 +71,7 @@ const RaiseComplaintForm = () => {
             </select>
           </div>
           {/* Title Field */}
-          <div className="mb-4">
+          <div className="mb-4 text-sm">
             <label className="block font-semibold mb-2" htmlFor="title">
               Title
             </label>
@@ -81,12 +81,12 @@ const RaiseComplaintForm = () => {
               placeholder="Enter title (e.g., Flooded Street)"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-1 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
             />
           </div>
 
           {/* Location Field */}
-          <div className="mb-4">
+          <div className="mb-4 text-sm">
             <label className="block font-semibold mb-2" htmlFor="location">
               Location
             </label>
@@ -96,12 +96,12 @@ const RaiseComplaintForm = () => {
               placeholder="Enter location (e.g., Sec 10, Faridabad)"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-1 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
             />
           </div>
 
           {/* Description Field */}
-          <div className="mb-4">
+          <div className="mb-4 text-sm">
             <label className="block font-semibold mb-2" htmlFor="description">
               Description
             </label>
@@ -110,7 +110,7 @@ const RaiseComplaintForm = () => {
               placeholder="Enter description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full px-3 py-2 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-1 bg-[#1e1e1e] border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-500"
               rows="4"
             ></textarea>
           </div>
@@ -119,7 +119,7 @@ const RaiseComplaintForm = () => {
           <button
             type="submit"
             disabled={loading} // Disable button when loading
-            className="w-full bg-yellow-300 text-black font-semibold text-lg px-4 py-2 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-500"
+            className="w-full  bg-yellow-300 text-black text-sm font-semibold px-4 py-1 rounded-md hover:bg-yellow-400 focus:outline-none focus:ring-1 focus:ring-yellow-500"
           >
             {loading ? "Submitting..." : "submit Issue"}
           </button>

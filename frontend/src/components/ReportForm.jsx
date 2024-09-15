@@ -35,26 +35,26 @@ const ReportForm = ({ isOpen, onClose, id }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center">
       <div className="bg-[#1c1a41] z-20 text-white p-6 rounded-lg w-11/12 md:w-1/3 relative">
-        <h2 className="text-2xl font-bold text-red-700 mb-4 font-lora">
+        <h2 className="text-xl font-bold text-red-700 mb-4 font-lora">
           Report issue
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-md mb-2">message</label>
+            <label className="block text-sm mb-2">message</label>
             <textarea
               rows={5}
               type="text"
               id="message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-[#1e1e1e] text-white focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              className="w-full px-3 py-2 border border-gray-600 rounded-lg bg-[#1e1e1e] text-white focus:outline-none focus:ring-1 focus:ring-yellow-300"
               required
             />
           </div>
           <div className="flex justify-between items-center">
             <button
               type="submit"
-              className="w-full bg-yellow-300 text-black font-semibold px-4 py-2 rounded-lg hover:bg-yellow-400"
+              className="w-full bg-yellow-300 text-black text-sm font-semibold px-4 py-1 rounded-lg hover:bg-yellow-400"
             >
               Submit
             </button>
@@ -62,7 +62,7 @@ const ReportForm = ({ isOpen, onClose, id }) => {
         </form>
         <button
           onClick={onClose}
-          className="absolute top-2 right-4 text-white text-4xl font-extrabold hover:scale-110"
+          className="absolute top-2 right-4 text-white text-2xl font-extrabold hover:scale-110"
         >
           &times;
         </button>
