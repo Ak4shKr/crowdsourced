@@ -14,11 +14,11 @@ const UserComplaintCard = ({
   onDelete,
 }) => {
   return (
-    <div className="mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-4">
+    <div className="mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-2">
       <div className="p-4">
         {/* Title, location and Delete */}
         <div className=" flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <h2 className="text-md font-semibold text-gray-800">{title}</h2>
           <div className="flex gap-4">
             <span className="flex items-center text-sm font-semibold text-gray-500">
               <ImLocation />
@@ -26,7 +26,7 @@ const UserComplaintCard = ({
             </span>
             <button
               onClick={onDelete}
-              className="text-red-600 font-extrabold text-2xl hover:scale-125"
+              className="text-red-600 font-extrabold text-xl hover:scale-125"
             >
               <MdDelete />
             </button>
@@ -35,10 +35,10 @@ const UserComplaintCard = ({
 
         {/* Description */}
         <div className="flex items-center justify-between">
-          <p className="mt-2 w-[80%] ml-2 text-gray-600 text-lg font-normal">
+          <p className="w-[80%] ml-2 text-gray-600 text-sm font-normal">
             {description}
           </p>
-          <div className="text-md font-normal text-gray-500">
+          <div className="text-sm font-normal text-gray-500">
             {/* Created at: */}
             {new Date(createdAt).toLocaleDateString()}
           </div>
@@ -46,10 +46,10 @@ const UserComplaintCard = ({
 
         {/* Application Status */}
         {/* Upvote and Downvote Buttons */}
-        <div className="flex justify-between items-center mt-4">
-          <div className="mt-4 flex justify-between">
+        <div className="flex justify-between items-center mt-2">
+          <div className="flex justify-between">
             <span
-              className={`px-3 py-1 rounded-md text-base font-semibold ${
+              className={`px-2 py-1 rounded-sm font-medium ${
                 applicationStatus === "open"
                   ? "bg-yellow-100 text-yellow-800"
                   : applicationStatus === "resolved"
@@ -60,7 +60,7 @@ const UserComplaintCard = ({
               {applicationStatus}
             </span>
           </div>
-          <p className="flex items-center text-green-500">
+          <p className="flex items-center text-green-500 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -77,7 +77,7 @@ const UserComplaintCard = ({
             </svg>
             Upvote ({upvotes})
           </p>
-          <p className="flex items-center text-red-500">
+          <p className="flex items-center text-red-500 text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -162,12 +162,12 @@ const UserComplaintList = () => {
   };
 
   if (loading)
-    return <div className="text-2xl text-white font-semibold">Loading...</div>;
+    return <div className="text-xl text-white font-semibold">Loading...</div>;
   if (error)
-    return <div className="text-red-500 text-xl font-semibold">{error}</div>;
+    return <div className="text-red-500 text-lg font-semibold">{error}</div>;
 
   return (
-    <div className="">
+    <div className="mt-4">
       {complaints.map((complaint) => (
         <UserComplaintCard
           key={complaint._id}

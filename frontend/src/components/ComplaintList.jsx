@@ -109,36 +109,36 @@ const ComplaintCard = ({
   };
   return (
     <div className="w-[90%] md:w-[70%] mx-auto bg-blue-50 shadow-lg rounded-lg overflow-hidden my-4">
-      <div className="p-4">
+      <div className="px-4 py-2">
         {/* Title and Location */}
         <div className="flex justify-between">
-          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-          <span className="flex text-md font-semibold text-gray-500 text-right">
+          <h2 className="text-md font-semibold text-gray-800">{title}</h2>
+          <span className="flex text-sm font-semibold text-gray-500 text-right">
             <ImLocation />` {location}
           </span>
         </div>
         {/* Description */}
         <div className="flex justify-between items-center">
-          <p className="mt-2 w-[80%] ml-2 text-md font-normal text-gray-800">
+          <p className="mt-1 w-[80%] ml-2 text-sm font-normal text-gray-800">
             {description}
           </p>
           <TbMessageReport
             onClick={() => setReportForm(!reportForm)}
-            className="text-red-600 font-extrabold text-2xl cursor-pointer"
+            className="text-red-600 font-extrabold text-xl cursor-pointer"
           />
         </div>
         {/* Created By and Date */}
-        <div className="flex justify-between items-center mt-4">
-          <div className="text-sm text-gray-600">
-            <span>Created by: </span>
-            <span className="font-semibold">{createdBy}</span>
+        <div className="flex justify-between items-center mt-2 text-sm">
+          <div className="text-gray-600">
+            <span>created by: </span>
+            <span className="font-medium">{createdBy}</span>
           </div>
-          <div className="text-sm font-medium text-gray-800">
+          <div className="text-sm text-gray-800">
             {new Date(createdAt).toLocaleDateString()}
           </div>
         </div>
         {/* Upvote and Downvote Buttons */}
-        <div className="flex justify-between items-center mt-4 font-medium">
+        <div className="flex justify-between items-center mt-2 text-sm">
           <button
             onClick={handleupvote}
             className="flex items-center text-green-500 hover:text-green-700"
@@ -206,11 +206,11 @@ const ComplaintCard = ({
               id="comment"
               onChange={(e) => setComment(e.target.value)}
               placeholder="Add a comment..."
-              className="w-full  border border-gray-300 rounded-md p-2 focus:outline-none focus:border-blue-500"
+              className="w-full text-sm border border-gray-300 rounded-md p-1 focus:outline-none focus:border-blue-500"
             />
             <button
               type="submit"
-              className="ml-4 bg-yellow-300 text-gray-800 font-semibold text-lg px-4 py-2 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-300"
+              className="ml-4 bg-yellow-300 text-gray-800 text-sm font-semibold px-4 py-1 rounded-md hover:bg-yellow-500 focus:outline-none focus:ring-1 focus:ring-yellow-300"
             >
               submit
             </button>

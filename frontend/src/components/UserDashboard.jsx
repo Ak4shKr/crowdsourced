@@ -62,35 +62,35 @@ const UserDashboard = () => {
     { name: "open issue", value: total.openIssues },
   ];
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8">
-      <h2 className="text-3xl font-bold text-gray-800 mb-6">User Dashboard</h2>
+    <div className="max-w-6xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-4">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">User Dashboard</h2>
 
       {/* User Activity Overview */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Your Activity Overview</h3>
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="bg-blue-100 p-4 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
-            <h4 className="text-lg font-semibold">Total Complaints Filed</h4>
-            <p className="text-2xl font-bold">{total.totalIssues}</p>
+        <h3 className="text-lg font-semibold mb-4">Your Activity Overview</h3>
+        <div className="flex flex-col md:flex-row md:space-x-2 justify-between">
+          <div className="bg-blue-100 p-2 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
+            <h4 className="text-md font-semibold">Total Complaints Filed</h4>
+            <p className="text-xl font-bold">{total.totalIssues}</p>
           </div>
-          <div className="bg-yellow-100 p-4 rounded-lg shadow-md w-full md:w-1/3">
-            <h4 className="text-lg font-semibold">Open Complaints</h4>
-            <p className="text-2xl font-bold">{total.openIssues}</p>
+          <div className="bg-yellow-100 p-2 rounded-lg shadow-md w-full md:w-1/3">
+            <h4 className="text-md font-semibold">Open Complaints</h4>
+            <p className="text-xl font-bold">{total.openIssues}</p>
           </div>
-          <div className="bg-red-100 p-4 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
-            <h4 className="text-lg font-semibold">Rejected Complaints</h4>
-            <p className="text-2xl font-bold">{total.rejectedIssues}</p>
+          <div className="bg-red-100 p-2 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
+            <h4 className="text-md font-semibold">Rejected Complaints</h4>
+            <p className="text-xl font-bold">{total.rejectedIssues}</p>
           </div>
-          <div className="bg-green-100 p-4 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
-            <h4 className="text-lg font-semibold">Resolved Complaints</h4>
-            <p className="text-2xl font-bold">{total.resolvedIssues}</p>
+          <div className="bg-green-100 p-2 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
+            <h4 className="text-md font-semibold">Resolved Complaints</h4>
+            <p className="text-xl font-bold">{total.resolvedIssues}</p>
           </div>
         </div>
       </section>
 
       {/* Complaint Trends */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4">
           Complaint Trends (Last 5 Months)
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -107,7 +107,7 @@ const UserDashboard = () => {
 
       {/* issue status distribution */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4">
           Issue Status Distribution
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -135,7 +135,7 @@ const UserDashboard = () => {
 
       {/* Issue Type Distribution */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4">
           Issue Type Distribution (%)
         </h3>
         <ResponsiveContainer width="100%" height={300}>
@@ -163,21 +163,21 @@ const UserDashboard = () => {
 
       {/* Engagement Status */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">
+        <h3 className="text-lg font-semibold mb-4">
           Engagement Over Your Issues
         </h3>
-        <div className="flex flex-col md:flex-row justify-between">
+        <div className="flex flex-col md:flex-row justify-between md:space-x-2">
           <div className="bg-blue-100 p-4 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
-            <h4 className="text-lg font-semibold">Total upvotes</h4>
-            <p className="text-2xl font-bold">{total.totalUpvotes}</p>
+            <h4 className="text-md font-semibold">Total upvotes</h4>
+            <p className="text-lg font-bold">{total.totalUpvotes}</p>
           </div>
           <div className="bg-green-100 p-4 rounded-lg shadow-md w-full md:w-1/3 mb-4 md:mb-0">
-            <h4 className="text-lg font-semibold">Total Downvotes</h4>
-            <p className="text-2xl font-bold">{total.totalDownvotes}</p>
+            <h4 className="text-md font-semibold">Total Downvotes</h4>
+            <p className="text-lg font-bold">{total.totalDownvotes}</p>
           </div>
           <div className="bg-red-100 p-4 rounded-lg shadow-md w-full md:w-1/3">
-            <h4 className="text-lg font-semibold">Total Comments</h4>
-            <p className="text-2xl font-bold">{total.totalComments}</p>
+            <h4 className="text-md font-semibold">Total Comments</h4>
+            <p className="text-lg font-bold">{total.totalComments}</p>
           </div>
           <div />
         </div>
@@ -185,9 +185,9 @@ const UserDashboard = () => {
 
       {/* Comparative Stats */}
       <section className="mb-8">
-        <h3 className="text-xl font-semibold mb-4">Comparative Stats</h3>
+        <h3 className="text-lg font-semibold mb-4">Comparative Stats</h3>
         <div className="bg-yellow-100 p-4 rounded-lg shadow-md">
-          <p className="text-lg">
+          <p className="text-md">
             You have filed{" "}
             <span className="font-bold">{comparativeStats.userComplaints}</span>{" "}
             complaints. The average number of complaints filed by other users is{" "}
