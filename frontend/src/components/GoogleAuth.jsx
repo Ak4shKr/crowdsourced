@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 export const GoogleAuth = () => {
-  const params = useSearchParams();
+  const [params] = useSearchParams();
   useEffect(() => {
     const code = params.get("code");
     if (code) {
