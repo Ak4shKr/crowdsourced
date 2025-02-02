@@ -64,7 +64,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/issues", issueRoutes);
 app.use("/api/admin", adminRoutes);
 
-app.post("/auth/google/callback", async (req, res) => {
+app.post("/api/auth/google/callback", async (req, res) => {
   const { code } = req.body;
 
   try {
