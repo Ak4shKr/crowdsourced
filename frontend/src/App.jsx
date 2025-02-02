@@ -10,6 +10,7 @@ import ComplaintList from "./components/ComplaintList";
 import Landing from "./components/Landing";
 import MyAccount from "./components/MyProfile";
 import Discussion from "./components/Discussion";
+import { GoogleAuth } from "./components/GoogleAuth";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -37,6 +38,7 @@ function App() {
           <Route path="/myprofile" element={<MyAccount />} />
           <Route path="/discussion" element={<Discussion />} />
           <Route path="*" element={<ComplaintList />} />
+          <Route path="/google-auth" element={<GoogleAuth />} />
         </Routes>
       </Router>
     </>

@@ -92,15 +92,15 @@ const LoginForm = () => {
             >
               {loading ? "Logging in..." : "LogIn"}
             </button>
-            <p className="mt-4 text-sm">
-              New User?{" "}
-              <a
-                href="/register"
-                className="text-yellow-300 hover:text-yellow-400 font-semibold text-center"
-              >
-                Register Here!
-              </a>
-            </p>
+            <button
+              onClick={() => {
+                window.location.href =
+                  "https://accounts.google.com/o/oauth2/v2/auth?client_id=221664733783-9lnk0s9559f85cd5aot6fg76uao2jtri.apps.googleusercontent.com&response_type=code&redirect_uri=https://crowdsourced.vercel.app/google-auth&scope=email profile";
+              }}
+              className="w-full mt-4 bg-blue-500 text-white font-semibold text-md px-4 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-1 focus:ring-blue-300"
+            >
+              Login with Google
+            </button>
           </form>
         </div>
       </div>
